@@ -1,113 +1,21 @@
 -- SponsorBase Seed Data
 -- Initial data for the SponsorBase database
 
--- Insert initial categories
-INSERT INTO categories (name, description) VALUES
-('Technology', 'Software, hardware, and tech services companies'),
-('Finance', 'Banks, fintech, and financial services'),
-('Healthcare', 'Medical devices, pharma, and healthcare services'),
-('Education', 'EdTech, schools, and educational institutions'),
-('Retail', 'E-commerce, brick-and-mortar retail'),
-('Media', 'News, entertainment, and content companies'),
-('Consulting', 'Business consulting and professional services'),
-('Manufacturing', 'Industrial and manufacturing companies'),
-('Non-profit', 'Charitable organizations and foundations'),
-('Government', 'Government agencies and public sector'),
-('Startup', 'Early-stage and growth-stage startups'),
-('Enterprise', 'Large established corporations'),
-('Local Business', 'Regional and local companies'),
-('Venture Capital', 'VC firms and investment companies'),
-('Other', 'Miscellaneous categories');
-
--- Insert sample companies (real tech companies known to sponsor events)
-INSERT INTO companies (name, description, website, industry, country) VALUES
-('Notion', 'All-in-one workspace for notes, tasks, wikis, and databases.', 'https://www.notion.so', 'Productivity Software', 'USA'),
-('Google', 'Technology company specializing in Internet-related services and products.', 'https://www.google.com', 'Technology', 'USA'),
-('Microsoft', 'Technology company that develops, manufactures, licenses, and supports software products.', 'https://www.microsoft.com', 'Technology', 'USA'),
-('Amazon', 'E-commerce and cloud computing company.', 'https://www.amazon.com', 'Technology', 'USA'),
-('Meta', 'Technology company that builds social media and communication tools.', 'https://www.meta.com', 'Technology', 'USA'),
-('Apple', 'Technology company that designs, develops, and sells consumer electronics.', 'https://www.apple.com', 'Technology', 'USA'),
-('Netflix', 'Streaming entertainment service provider.', 'https://www.netflix.com', 'Media', 'USA'),
-('Tesla', 'Electric vehicle and clean energy company.', 'https://www.tesla.com', 'Manufacturing', 'USA'),
-('Salesforce', 'Cloud-based software company specializing in customer relationship management.', 'https://www.salesforce.com', 'Technology', 'USA'),
-('Stripe', 'Technology company that builds economic infrastructure for the internet.', 'https://stripe.com', 'Finance', 'USA'),
-('GitHub', 'Platform for hosting and collaborating on software development projects.', 'https://github.com', 'Technology', 'USA'),
-('Twilio', 'Cloud communications platform enabling developers to build communication experiences.', 'https://www.twilio.com', 'Technology', 'USA'),
-('Slack', 'Business communication platform.', 'https://slack.com', 'Technology', 'USA'),
-('Airbnb', 'Online marketplace for lodging and tourism experiences.', 'https://www.airbnb.com', 'Technology', 'USA'),
-('Uber', 'Transportation network company.', 'https://www.uber.com', 'Technology', 'USA'),
-('LinkedIn', 'Professional networking and career development platform.', 'https://www.linkedin.com', 'Technology', 'USA'),
-('Twitter', 'Social media and news platform.', 'https://twitter.com', 'Media', 'USA'),
-('Reddit', 'Social news aggregation and discussion platform.', 'https://www.reddit.com', 'Media', 'USA'),
-('Dropbox', 'File hosting service and cloud storage.', 'https://www.dropbox.com', 'Technology', 'USA'),
-('Spotify', 'Audio streaming and media services provider.', 'https://www.spotify.com', 'Media', 'Sweden'),
-('Adobe', 'Software company specializing in creativity and multimedia products.', 'https://www.adobe.com', 'Technology', 'USA'),
-('DigitalOcean', 'Cloud computing platform providing developers with cloud infrastructure services.', 'https://www.digitalocean.com', 'Technology', 'USA');
-
--- Link companies to categories
-INSERT INTO company_categories (company_id, category_id) 
-SELECT c.id, cat.id 
-FROM companies c, categories cat 
-WHERE c.name IN ('Google', 'Microsoft', 'Amazon', 'Meta', 'Apple') AND cat.name = 'Technology';
-
-INSERT INTO company_categories (company_id, category_id) 
-SELECT c.id, cat.id 
-FROM companies c, categories cat 
-WHERE c.name IN ('Netflix', 'Twitter', 'Reddit', 'Spotify') AND cat.name = 'Media';
-
-INSERT INTO company_categories (company_id, category_id) 
-SELECT c.id, cat.id 
-FROM companies c, categories cat 
-WHERE c.name = 'Stripe' AND cat.name = 'Finance';
-
-INSERT INTO company_categories (company_id, category_id) 
-SELECT c.id, cat.id 
-FROM companies c, categories cat 
-WHERE c.name = 'Tesla' AND cat.name = 'Manufacturing';
+-- Insert sample companies
+INSERT INTO companies (name, website, industry, country) VALUES
+('Notion', 'https://notion.so', 'Productivity Software', 'USA'),
+('DigitalOcean', 'https://digitalocean.com', 'Cloud Computing', 'USA'),
+('Polygon', 'https://polygon.technology', 'Blockchain', 'India');
 
 -- Insert sample contacts
 INSERT INTO contacts (company_id, email, department, source) VALUES
-((SELECT id FROM companies WHERE name = 'Notion'), 'partnerships@notion.so', 'partnerships', 'public website'),
-((SELECT id FROM companies WHERE name = 'Notion'), 'marketing@notion.so', 'marketing', 'public website'),
-((SELECT id FROM companies WHERE name = 'Notion'), 'community@notion.so', 'community', 'public website'),
-((SELECT id FROM companies WHERE name = 'Google'), 'devrel@google.com', 'developer relations', 'public website'),
-((SELECT id FROM companies WHERE name = 'Microsoft'), 'devrel@microsoft.com', 'developer relations', 'public website'),
-((SELECT id FROM companies WHERE name = 'GitHub'), 'sponsorships@github.com', 'sponsorships', 'public website'),
-((SELECT id FROM companies WHERE name = 'Stripe'), 'devrel@stripe.com', 'developer relations', 'public website'),
-((SELECT id FROM companies WHERE name = 'Twilio'), 'devrel@twilio.com', 'developer education', 'public website');
-
--- Insert sample sponsorship types
-INSERT INTO sponsorship_types (company_id, type, support_type, avg_amount) VALUES
-((SELECT id FROM companies WHERE name = 'Notion'), 'Hackathons', 'Software Licenses', '$500-$2,000'),
-((SELECT id FROM companies WHERE name = 'Notion'), 'Tech Conferences', 'Swag Kits', '$1,000-$5,000'),
-((SELECT id FROM companies WHERE name = 'Notion'), 'Meetups', 'Workspace Credits', '$100-$500'),
-((SELECT id FROM companies WHERE name = 'Google'), 'Hackathons', 'Cloud Credits', '$5,000-$10,000'),
-((SELECT id FROM companies WHERE name = 'Google'), 'Tech Conferences', 'Speaker Sponsorship', '$2,000-$10,000'),
-((SELECT id FROM companies WHERE name = 'Google'), 'College Fests', 'Mentorship Programs', '$1,000-$5,000'),
-((SELECT id FROM companies WHERE name = 'Microsoft'), 'Hackathons', 'Azure Credits', '$3,000-$8,000'),
-((SELECT id FROM companies WHERE name = 'Microsoft'), 'Tech Conferences', 'Booth Space', '$5,000-$15,000'),
-((SELECT id FROM companies WHERE name = 'Microsoft'), 'Open Source Events', 'GitHub Sponsors', '$1,000-$10,000'),
-((SELECT id FROM companies WHERE name = 'DigitalOcean'), 'Hackathons', 'Cloud Credits', '$2,000-$5,000'),
-((SELECT id FROM companies WHERE name = 'DigitalOcean'), 'Meetups', 'Community Credits', '$200-$1,000'),
-((SELECT id FROM companies WHERE name = 'DigitalOcean'), 'College Fests', 'Student Credits', '$500-$2,000');
+(1, 'partnerships@notion.so', 'Partnerships', 'Public Website'),
+(2, 'community@digitalocean.com', 'Community', 'Developer Program');
 
 -- Insert sample events
 INSERT INTO events (company_id, event_name, year, location) VALUES
-((SELECT id FROM companies WHERE name = 'GitHub'), 'HackMIT', 2024, 'MIT, Cambridge, MA'),
-((SELECT id FROM companies WHERE name = 'GitHub'), 'GitHub Universe', 2023, 'San Francisco, CA'),
-((SELECT id FROM companies WHERE name = 'GitHub'), 'GitHub Satellite', 2023, 'Virtual'),
-((SELECT id FROM companies WHERE name = 'Google'), 'Google Summer of Code', 2023, 'Virtual'),
-((SELECT id FROM companies WHERE name = 'Google'), 'Google I/O', 2023, 'Mountain View, CA'),
-((SELECT id FROM companies WHERE name = 'Google'), 'DevFest', 2023, 'Multiple Locations'),
-((SELECT id FROM companies WHERE name = 'Microsoft'), 'Microsoft Build', 2023, 'Seattle, WA'),
-((SELECT id FROM companies WHERE name = 'Microsoft'), 'Microsoft Hackathon', 2023, 'Redmond, WA'),
-((SELECT id FROM companies WHERE name = 'Notion'), 'Notion Hackathon', 2024, 'San Francisco, CA'),
-((SELECT id FROM companies WHERE name = 'Notion'), 'Productivity Summit', 2023, 'Virtual'),
-((SELECT id FROM companies WHERE name = 'Stripe'), 'Stripe Sessions', 2023, 'San Francisco, CA'),
-((SELECT id FROM companies WHERE name = 'Stripe'), 'Stripe Hackathon', 2024, 'Virtual'),
-((SELECT id FROM companies WHERE name = 'DigitalOcean'), 'DO Hackathon', 2024, 'New York, NY'),
-((SELECT id FROM companies WHERE name = 'DigitalOcean'), 'Deploy Conference', 2023, 'Virtual'),
-((SELECT id FROM companies WHERE name = 'DigitalOcean'), 'Community Meetup', 2023, 'Multiple Cities');
+(1, 'HackMIT', 2024, 'USA'),
+(2, 'ETHGlobal', 2023, 'Global');
 
 -- Insert sample sponsorship history
 INSERT INTO sponsorships (company_id, event_name, event_type, sponsorship_level, amount_range, year, source_url, is_verified) VALUES

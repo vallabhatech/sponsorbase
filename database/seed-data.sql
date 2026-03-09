@@ -20,27 +20,28 @@ INSERT INTO categories (name, description) VALUES
 ('Other', 'Miscellaneous categories');
 
 -- Insert sample companies (real tech companies known to sponsor events)
-INSERT INTO companies (name, description, website, industry, size, headquarters, founded_year) VALUES
-('Google', 'Technology company specializing in Internet-related services and products.', 'https://www.google.com', 'Technology', '10,000+', 'Mountain View, CA', 1998),
-('Microsoft', 'Technology company that develops, manufactures, licenses, and supports software products.', 'https://www.microsoft.com', 'Technology', '10,000+', 'Redmond, WA', 1975),
-('Amazon', 'E-commerce and cloud computing company.', 'https://www.amazon.com', 'Technology', '10,000+', 'Seattle, WA', 1994),
-('Meta', 'Technology company that builds social media and communication tools.', 'https://www.meta.com', 'Technology', '10,000+', 'Menlo Park, CA', 2004),
-('Apple', 'Technology company that designs, develops, and sells consumer electronics.', 'https://www.apple.com', 'Technology', '10,000+', 'Cupertino, CA', 1976),
-('Netflix', 'Streaming entertainment service provider.', 'https://www.netflix.com', 'Media', '10,000+', 'Los Gatos, CA', 1997),
-('Tesla', 'Electric vehicle and clean energy company.', 'https://www.tesla.com', 'Manufacturing', '10,000+', 'Austin, TX', 2003),
-('Salesforce', 'Cloud-based software company specializing in customer relationship management.', 'https://www.salesforce.com', 'Technology', '10,000+', 'San Francisco, CA', 1999),
-('Stripe', 'Technology company that builds economic infrastructure for the internet.', 'https://stripe.com', 'Finance', '1,000-5,000', 'San Francisco, CA', 2010),
-('GitHub', 'Platform for hosting and collaborating on software development projects.', 'https://github.com', 'Technology', '1,000-5,000', 'San Francisco, CA', 2008),
-('Twilio', 'Cloud communications platform enabling developers to build communication experiences.', 'https://www.twilio.com', 'Technology', '1,000-5,000', 'San Francisco, CA', 2008),
-('Slack', 'Business communication platform.', 'https://slack.com', 'Technology', '1,000-5,000', 'San Francisco, CA', 2009),
-('Airbnb', 'Online marketplace for lodging and tourism experiences.', 'https://www.airbnb.com', 'Technology', '5,000-10,000', 'San Francisco, CA', 2008),
-('Uber', 'Transportation network company.', 'https://www.uber.com', 'Technology', '10,000+', 'San Francisco, CA', 2009),
-('LinkedIn', 'Professional networking and career development platform.', 'https://www.linkedin.com', 'Technology', '10,000+', 'Sunnyvale, CA', 2002),
-('Twitter', 'Social media and news platform.', 'https://twitter.com', 'Media', '5,000-10,000', 'San Francisco, CA', 2006),
-('Reddit', 'Social news aggregation and discussion platform.', 'https://www.reddit.com', 'Media', '1,000-5,000', 'San Francisco, CA', 2005),
-('Dropbox', 'File hosting service and cloud storage.', 'https://www.dropbox.com', 'Technology', '1,000-5,000', 'San Francisco, CA', 2007),
-('Spotify', 'Audio streaming and media services provider.', 'https://www.spotify.com', 'Media', '5,000-10,000', 'Stockholm, Sweden', 2006),
-('Adobe', 'Software company specializing in creativity and multimedia products.', 'https://www.adobe.com', 'Technology', '10,000+', 'San Jose, CA', 1982);
+INSERT INTO companies (name, description, website, industry, country) VALUES
+('Notion', 'All-in-one workspace for notes, tasks, wikis, and databases.', 'https://www.notion.so', 'Productivity Software', 'USA'),
+('Google', 'Technology company specializing in Internet-related services and products.', 'https://www.google.com', 'Technology', 'USA'),
+('Microsoft', 'Technology company that develops, manufactures, licenses, and supports software products.', 'https://www.microsoft.com', 'Technology', 'USA'),
+('Amazon', 'E-commerce and cloud computing company.', 'https://www.amazon.com', 'Technology', 'USA'),
+('Meta', 'Technology company that builds social media and communication tools.', 'https://www.meta.com', 'Technology', 'USA'),
+('Apple', 'Technology company that designs, develops, and sells consumer electronics.', 'https://www.apple.com', 'Technology', 'USA'),
+('Netflix', 'Streaming entertainment service provider.', 'https://www.netflix.com', 'Media', 'USA'),
+('Tesla', 'Electric vehicle and clean energy company.', 'https://www.tesla.com', 'Manufacturing', 'USA'),
+('Salesforce', 'Cloud-based software company specializing in customer relationship management.', 'https://www.salesforce.com', 'Technology', 'USA'),
+('Stripe', 'Technology company that builds economic infrastructure for the internet.', 'https://stripe.com', 'Finance', 'USA'),
+('GitHub', 'Platform for hosting and collaborating on software development projects.', 'https://github.com', 'Technology', 'USA'),
+('Twilio', 'Cloud communications platform enabling developers to build communication experiences.', 'https://www.twilio.com', 'Technology', 'USA'),
+('Slack', 'Business communication platform.', 'https://slack.com', 'Technology', 'USA'),
+('Airbnb', 'Online marketplace for lodging and tourism experiences.', 'https://www.airbnb.com', 'Technology', 'USA'),
+('Uber', 'Transportation network company.', 'https://www.uber.com', 'Technology', 'USA'),
+('LinkedIn', 'Professional networking and career development platform.', 'https://www.linkedin.com', 'Technology', 'USA'),
+('Twitter', 'Social media and news platform.', 'https://twitter.com', 'Media', 'USA'),
+('Reddit', 'Social news aggregation and discussion platform.', 'https://www.reddit.com', 'Media', 'USA'),
+('Dropbox', 'File hosting service and cloud storage.', 'https://www.dropbox.com', 'Technology', 'USA'),
+('Spotify', 'Audio streaming and media services provider.', 'https://www.spotify.com', 'Media', 'Sweden'),
+('Adobe', 'Software company specializing in creativity and multimedia products.', 'https://www.adobe.com', 'Technology', 'USA');
 
 -- Link companies to categories
 INSERT INTO company_categories (company_id, category_id) 

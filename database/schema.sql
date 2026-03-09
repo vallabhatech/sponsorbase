@@ -15,23 +15,19 @@ CREATE TABLE categories (
 
 -- Companies table - core sponsor information
 CREATE TABLE companies (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    description TEXT,
     website VARCHAR(255),
-    logo_url VARCHAR(255),
+    description TEXT,
     industry VARCHAR(100),
-    size VARCHAR(50), -- e.g., '1-10', '11-50', '51-200', etc.
-    headquarters VARCHAR(255),
-    founded_year INTEGER,
-    is_active BOOLEAN DEFAULT true,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    country VARCHAR(100),
+    logo_url TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Company categories junction table
 CREATE TABLE company_categories (
-    company_id UUID REFERENCES companies(id) ON DELETE CASCADE,
+    company_id INTEGER REFERENCES companies(id) ON DELETE CASCADE,
     category_id UUID REFERENCES categories(id) ON DELETE CASCADE,
     PRIMARY KEY (company_id, category_id)
 );
@@ -39,7 +35,7 @@ CREATE TABLE company_categories (
 -- Sponsorship contacts for each company
 CREATE TABLE sponsorship_contacts (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    company_id UUID REFERENCES companies(id) ON DELETE CASCADE,
+    company_id INTEGER REFERENCES companies(id) ON DELETE CASCADE,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255),
     role VARCHAR(100),
@@ -54,7 +50,7 @@ CREATE TABLE sponsorship_contacts (
 -- Sponsorship history
 CREATE TABLE sponsorships (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    company_id UUID REFERENCES companies(id) ON DELETE CASCADE,
+    company_id INTEGER REFERENCES companies(id) ON DELETE CASCADE,
     event_name VARCHAR(255) NOT NULL,
     event_type VARCHAR(100), -- e.g., 'hackathon', 'conference', 'meetup'
     sponsorship_level VARCHAR(100), -- e.g., 'Gold', 'Silver', 'Bronze'

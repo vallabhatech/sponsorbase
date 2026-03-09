@@ -168,6 +168,11 @@ CREATE INDEX idx_search_analytics_query ON search_analytics(query);
 CREATE INDEX idx_companies_search ON companies USING gin(to_tsvector('english', name || ' ' || COALESCE(description, '')));
 CREATE INDEX idx_sponsorships_search ON sponsorships USING gin(to_tsvector('english', event_name));
 
+-- Performance indexes for search optimization
+CREATE INDEX idx_company_name ON companies(name);
+CREATE INDEX idx_industry ON companies(industry);
+CREATE INDEX idx_event_name ON events(event_name);
+
 -- Triggers for updated_at timestamps
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$

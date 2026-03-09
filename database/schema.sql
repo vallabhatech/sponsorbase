@@ -52,6 +52,16 @@ CREATE TABLE sponsorship_types (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Events table for tracking past sponsorship history
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    company_id INTEGER REFERENCES companies(id) ON DELETE CASCADE,
+    event_name VARCHAR(255),
+    year INTEGER,
+    location VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Sponsorship history
 CREATE TABLE sponsorships (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),

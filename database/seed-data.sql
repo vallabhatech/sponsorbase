@@ -91,6 +91,24 @@ INSERT INTO sponsorship_types (company_id, type, support_type, avg_amount) VALUE
 ((SELECT id FROM companies WHERE name = 'DigitalOcean'), 'Meetups', 'Community Credits', '$200-$1,000'),
 ((SELECT id FROM companies WHERE name = 'DigitalOcean'), 'College Fests', 'Student Credits', '$500-$2,000');
 
+-- Insert sample events
+INSERT INTO events (company_id, event_name, year, location) VALUES
+((SELECT id FROM companies WHERE name = 'GitHub'), 'HackMIT', 2024, 'MIT, Cambridge, MA'),
+((SELECT id FROM companies WHERE name = 'GitHub'), 'GitHub Universe', 2023, 'San Francisco, CA'),
+((SELECT id FROM companies WHERE name = 'GitHub'), 'GitHub Satellite', 2023, 'Virtual'),
+((SELECT id FROM companies WHERE name = 'Google'), 'Google Summer of Code', 2023, 'Virtual'),
+((SELECT id FROM companies WHERE name = 'Google'), 'Google I/O', 2023, 'Mountain View, CA'),
+((SELECT id FROM companies WHERE name = 'Google'), 'DevFest', 2023, 'Multiple Locations'),
+((SELECT id FROM companies WHERE name = 'Microsoft'), 'Microsoft Build', 2023, 'Seattle, WA'),
+((SELECT id FROM companies WHERE name = 'Microsoft'), 'Microsoft Hackathon', 2023, 'Redmond, WA'),
+((SELECT id FROM companies WHERE name = 'Notion'), 'Notion Hackathon', 2024, 'San Francisco, CA'),
+((SELECT id FROM companies WHERE name = 'Notion'), 'Productivity Summit', 2023, 'Virtual'),
+((SELECT id FROM companies WHERE name = 'Stripe'), 'Stripe Sessions', 2023, 'San Francisco, CA'),
+((SELECT id FROM companies WHERE name = 'Stripe'), 'Stripe Hackathon', 2024, 'Virtual'),
+((SELECT id FROM companies WHERE name = 'DigitalOcean'), 'DO Hackathon', 2024, 'New York, NY'),
+((SELECT id FROM companies WHERE name = 'DigitalOcean'), 'Deploy Conference', 2023, 'Virtual'),
+((SELECT id FROM companies WHERE name = 'DigitalOcean'), 'Community Meetup', 2023, 'Multiple Cities');
+
 -- Insert sample sponsorship history
 INSERT INTO sponsorships (company_id, event_name, event_type, sponsorship_level, amount_range, year, source_url, is_verified) VALUES
 ((SELECT id FROM companies WHERE name = 'Google'), 'Google Summer of Code', 'hackathon', 'Platinum', '$10,000+', 2023, 'https://summerofcode.withgoogle.com/', true),

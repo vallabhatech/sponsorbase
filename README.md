@@ -1,48 +1,67 @@
 # SponsorBase
 
-A project for managing sponsorships and partnerships.
+Find the right sponsors for your event.
 
-## Description
+SponsorBase is a platform designed to help hackathon organizers, college clubs, and tech communities discover companies that actively sponsor events.
 
-This project provides a comprehensive solution for managing sponsor relationships, tracking sponsorships, and organizing partnership data.
+Instead of searching endlessly across Google and LinkedIn, organizers can quickly find sponsor-friendly companies, contact information, and past sponsorship history.
 
-## Features
+## The Problem
 
-- Sponsor management
-- Partnership tracking
-- Data organization
-- [Add more features as they are implemented]
+Event organizers often struggle with:
 
-## Getting Started
+- No central database of sponsors
+- Difficulty finding the correct sponsorship contacts
+- Unclear information about companies that sponsor events
+- Time wasted researching potential partners
 
-### Prerequisites
+This leads to missed opportunities and inefficient outreach.
 
-List any prerequisites needed to run this project.
+## The Solution
 
-### Installation
+SponsorBase provides a searchable sponsor directory with:
 
-Provide installation instructions here.
+- Companies that sponsor events
+- Sponsorship categories
+- Public contact emails
+- Past event sponsorships
+- Outreach templates for organizers
 
-## Usage
+## Core Features
 
-Explain how to use the project here.
+- Sponsor search engine
+- Company sponsorship profiles
+- Event sponsorship history
+- Public partnership contact emails
+- Community submitted sponsors
+
+## Tech Stack
+
+### Frontend
+- Next.js
+- Tailwind CSS
+
+### Backend
+- Node.js / API Routes
+
+### Database
+- PostgreSQL
+
+### Search
+- Meilisearch or PostgreSQL Full Text Search
+
+## Project Vision
+
+SponsorBase aims to become the largest open directory of companies that sponsor events, helping organizers worldwide connect with the right partners.
+
+## Project Status
+
+Early development stage.
 
 ## Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Contributions are welcome. If you'd like to help improve the sponsor database or platform features, feel free to submit a pull request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-[Your Name] - [@your-twitter] - [your-email@example.com]
-
-## Acknowledgments
-
-- [List any acknowledgments here]
+MIT License

@@ -32,19 +32,14 @@ CREATE TABLE company_categories (
     PRIMARY KEY (company_id, category_id)
 );
 
--- Sponsorship contacts for each company
-CREATE TABLE sponsorship_contacts (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+-- Contacts table for company contact information
+CREATE TABLE contacts (
+    id SERIAL PRIMARY KEY,
     company_id INTEGER REFERENCES companies(id) ON DELETE CASCADE,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255),
-    role VARCHAR(100),
-    linkedin_url VARCHAR(255),
-    phone VARCHAR(50),
-    is_verified BOOLEAN DEFAULT false,
-    verification_source VARCHAR(255),
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    email VARCHAR(255) NOT NULL,
+    department VARCHAR(100),
+    source VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Sponsorship history

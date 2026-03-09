@@ -64,13 +64,16 @@ SELECT c.id, cat.id
 FROM companies c, categories cat 
 WHERE c.name = 'Tesla' AND cat.name = 'Manufacturing';
 
--- Insert sample sponsorship contacts
-INSERT INTO sponsorship_contacts (company_id, name, email, role, linkedin_url, is_verified) VALUES
-((SELECT id FROM companies WHERE name = 'Google'), 'Google Developer Relations', 'devrel@google.com', 'Developer Relations Team', 'https://developers.google.com/', true),
-((SELECT id FROM companies WHERE name = 'Microsoft'), 'Microsoft Developer Relations', 'devrel@microsoft.com', 'Developer Relations Team', 'https://developer.microsoft.com/', true),
-((SELECT id FROM companies WHERE name = 'GitHub'), 'GitHub Sponsorship Team', 'sponsorships@github.com', 'Sponsorship Team', 'https://github.com/about/sponsorships', true),
-((SELECT id FROM companies WHERE name = 'Stripe'), 'Stripe Developer Relations', 'devrel@stripe.com', 'Developer Relations Team', 'https://stripe.com/devrel', true),
-((SELECT id FROM companies WHERE name = 'Twilio'), 'Twilio Developer Education', 'devrel@twilio.com', 'Developer Education Team', 'https://www.twilio.com/devrel', true);
+-- Insert sample contacts
+INSERT INTO contacts (company_id, email, department, source) VALUES
+((SELECT id FROM companies WHERE name = 'Notion'), 'partnerships@notion.so', 'partnerships', 'public website'),
+((SELECT id FROM companies WHERE name = 'Notion'), 'marketing@notion.so', 'marketing', 'public website'),
+((SELECT id FROM companies WHERE name = 'Notion'), 'community@notion.so', 'community', 'public website'),
+((SELECT id FROM companies WHERE name = 'Google'), 'devrel@google.com', 'developer relations', 'public website'),
+((SELECT id FROM companies WHERE name = 'Microsoft'), 'devrel@microsoft.com', 'developer relations', 'public website'),
+((SELECT id FROM companies WHERE name = 'GitHub'), 'sponsorships@github.com', 'sponsorships', 'public website'),
+((SELECT id FROM companies WHERE name = 'Stripe'), 'devrel@stripe.com', 'developer relations', 'public website'),
+((SELECT id FROM companies WHERE name = 'Twilio'), 'devrel@twilio.com', 'developer education', 'public website');
 
 -- Insert sample sponsorship history
 INSERT INTO sponsorships (company_id, event_name, event_type, sponsorship_level, amount_range, year, source_url, is_verified) VALUES

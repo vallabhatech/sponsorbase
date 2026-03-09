@@ -41,7 +41,8 @@ INSERT INTO companies (name, description, website, industry, country) VALUES
 ('Reddit', 'Social news aggregation and discussion platform.', 'https://www.reddit.com', 'Media', 'USA'),
 ('Dropbox', 'File hosting service and cloud storage.', 'https://www.dropbox.com', 'Technology', 'USA'),
 ('Spotify', 'Audio streaming and media services provider.', 'https://www.spotify.com', 'Media', 'Sweden'),
-('Adobe', 'Software company specializing in creativity and multimedia products.', 'https://www.adobe.com', 'Technology', 'USA');
+('Adobe', 'Software company specializing in creativity and multimedia products.', 'https://www.adobe.com', 'Technology', 'USA'),
+('DigitalOcean', 'Cloud computing platform providing developers with cloud infrastructure services.', 'https://www.digitalocean.com', 'Technology', 'USA');
 
 -- Link companies to categories
 INSERT INTO company_categories (company_id, category_id) 
@@ -74,6 +75,21 @@ INSERT INTO contacts (company_id, email, department, source) VALUES
 ((SELECT id FROM companies WHERE name = 'GitHub'), 'sponsorships@github.com', 'sponsorships', 'public website'),
 ((SELECT id FROM companies WHERE name = 'Stripe'), 'devrel@stripe.com', 'developer relations', 'public website'),
 ((SELECT id FROM companies WHERE name = 'Twilio'), 'devrel@twilio.com', 'developer education', 'public website');
+
+-- Insert sample sponsorship types
+INSERT INTO sponsorship_types (company_id, type, support_type, avg_amount) VALUES
+((SELECT id FROM companies WHERE name = 'Notion'), 'Hackathons', 'Software Licenses', '$500-$2,000'),
+((SELECT id FROM companies WHERE name = 'Notion'), 'Tech Conferences', 'Swag Kits', '$1,000-$5,000'),
+((SELECT id FROM companies WHERE name = 'Notion'), 'Meetups', 'Workspace Credits', '$100-$500'),
+((SELECT id FROM companies WHERE name = 'Google'), 'Hackathons', 'Cloud Credits', '$5,000-$10,000'),
+((SELECT id FROM companies WHERE name = 'Google'), 'Tech Conferences', 'Speaker Sponsorship', '$2,000-$10,000'),
+((SELECT id FROM companies WHERE name = 'Google'), 'College Fests', 'Mentorship Programs', '$1,000-$5,000'),
+((SELECT id FROM companies WHERE name = 'Microsoft'), 'Hackathons', 'Azure Credits', '$3,000-$8,000'),
+((SELECT id FROM companies WHERE name = 'Microsoft'), 'Tech Conferences', 'Booth Space', '$5,000-$15,000'),
+((SELECT id FROM companies WHERE name = 'Microsoft'), 'Open Source Events', 'GitHub Sponsors', '$1,000-$10,000'),
+((SELECT id FROM companies WHERE name = 'DigitalOcean'), 'Hackathons', 'Cloud Credits', '$2,000-$5,000'),
+((SELECT id FROM companies WHERE name = 'DigitalOcean'), 'Meetups', 'Community Credits', '$200-$1,000'),
+((SELECT id FROM companies WHERE name = 'DigitalOcean'), 'College Fests', 'Student Credits', '$500-$2,000');
 
 -- Insert sample sponsorship history
 INSERT INTO sponsorships (company_id, event_name, event_type, sponsorship_level, amount_range, year, source_url, is_verified) VALUES

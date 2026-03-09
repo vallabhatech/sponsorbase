@@ -42,6 +42,16 @@ CREATE TABLE contacts (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Sponsorship types table for company sponsorship preferences
+CREATE TABLE sponsorship_types (
+    id SERIAL PRIMARY KEY,
+    company_id INTEGER REFERENCES companies(id) ON DELETE CASCADE,
+    type VARCHAR(100),
+    support_type VARCHAR(255),
+    avg_amount VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Sponsorship history
 CREATE TABLE sponsorships (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),

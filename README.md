@@ -9,12 +9,8 @@ Instead of searching endlessly across Google and LinkedIn, organizers can quickl
 ## The Problem
 
 Event organizers often struggle with:
-sfdgvdfbgfn ghm ghm ghm ghm ghm ghm
-- No central database of sponsors
-ef;shjfiof
-elfkhof
-sljfs
 
+- No central database of sponsors
 - Difficulty finding the correct sponsorship contacts
 - Unclear information about companies that sponsor events
 - Time wasted researching potential partners

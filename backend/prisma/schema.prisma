@@ -1,0 +1,194 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Category {
+  id          String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name        String   @unique @db.VarChar(100)
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  companies CompanyCategory[]
+
+  @@map("categories")
+}
+
+model Company {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(255)
+  website     String?  @db.VarChar(255)
+  description String?
+  industry    String?  @db.VarChar(100)
+  country     String?  @db.VarChar(100)
+  logoUrl     String?  @map("logo_url")
+  createdAt   DateTime? @default(now()) @map("created_at") @db.Timestamp
+
+  categories       CompanyCategory[]
+  contacts         Contact[]
+  sponsorshipTypes SponsorshipType[]
+  events           Event[]
+  sponsorships     Sponsorship[]
+
+  @@index([name], map: "idx_companies_name")
+  @@index([industry], map: "idx_companies_industry")
+  @@map("companies")
+}
+
+model CompanyCategory {
+  companyId Int      @map("company_id")
+  categoryId String  @map("category_id") @db.Uuid
+
+  company  Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([companyId, categoryId])
+  @@map("company_categories")
+}
+
+model Contact {
+  id         Int      @id @default(autoincrement())
+  companyId  Int?     @map("company_id")
+  email      String   @db.VarChar(255)
+  department String?  @db.VarChar(100)
+  source     String?  @db.VarChar(255)
+  createdAt  DateTime? @default(now()) @map("created_at") @db.Timestamp
+
+  company Company? @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@map("contacts")
+}
+
+model SponsorshipType {
+  id          Int      @id @default(autoincrement())
+  companyId   Int?     @map("company_id")
+  type        String?  @db.VarChar(100)
+  supportType String?  @map("support_type") @db.VarChar(255)
+  avgAmount   String?  @map("avg_amount") @db.VarChar(100)
+  createdAt   DateTime? @default(now()) @map("created_at") @db.Timestamp
+
+  company Company? @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@map("sponsorship_types")
+}
+
+model Event {
+  id        Int      @id @default(autoincrement())
+  companyId Int?     @map("company_id")
+  eventName String?  @map("event_name") @db.VarChar(255)
+  year      Int?
+  location  String?  @db.VarChar(255)
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp
+
+  company Company? @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([eventName], map: "idx_event_name")
+  @@map("events")
+}
+
+model Sponsorship {
+  id               String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  companyId        Int?     @map("company_id")
+  eventName        String   @map("event_name") @db.VarChar(255)
+  eventType        String?  @map("event_type") @db.VarChar(100)
+  sponsorshipLevel String?  @map("sponsorship_level") @db.VarChar(100)
+  amountRange      String?  @map("amount_range") @db.VarChar(50)
+  year             Int
+  month            Int?
+  sourceUrl        String?  @map("source_url") @db.VarChar(500)
+  isVerified       Boolean? @default(false) @map("is_verified")
+  submittedBy      String?  @map("submitted_by") @db.Uuid
+  createdAt        DateTime? @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt        DateTime? @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  company Company? @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId], map: "idx_sponsorships_company")
+  @@index([year], map: "idx_sponsorships_year")
+  @@index([eventType], map: "idx_sponsorships_event_type")
+  @@index([isVerified], map: "idx_sponsorships_verified")
+  @@map("sponsorships")
+}
+
+model User {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  email           String    @unique @db.VarChar(255)
+  passwordHash    String    @map("password_hash") @db.VarChar(255)
+  name            String?   @db.VarChar(255)
+  role            String?   @default("user") @db.VarChar(50)
+  organization    String?   @db.VarChar(255)
+  isVerified      Boolean?  @default(false) @map("is_verified")
+  reputationScore Int?      @default(0) @map("reputation_score")
+  createdAt       DateTime? @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt       DateTime? @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  lastLogin       DateTime? @map("last_login") @db.Timestamptz
+
+  outreachTemplates OutreachTemplate[]
+  submittedModerations ModerationQueue[] @relation("SubmittedModerations")
+  reviewedModerations  ModerationQueue[] @relation("ReviewedModerations")
+  searchAnalytics      SearchAnalytics[]
+
+  @@index([email], map: "idx_users_email")
+  @@index([role], map: "idx_users_role")
+  @@index([isVerified], map: "idx_users_verified")
+  @@map("users")
+}
+
+model OutreachTemplate {
+  id               String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name             String   @db.VarChar(255)
+  subject          String?  @db.VarChar(255)
+  body             String
+  eventType        String?  @map("event_type") @db.VarChar(100)
+  sponsorshipLevel String?  @map("sponsorship_level") @db.VarChar(100)
+  isPublic         Boolean? @default(true) @map("is_public")
+  createdBy        String?  @map("created_by") @db.Uuid
+  usageCount       Int?     @default(0) @map("usage_count")
+  createdAt        DateTime? @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt        DateTime? @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  author User? @relation(fields: [createdBy], references: [id])
+
+  @@map("outreach_templates")
+}
+
+model ModerationQueue {
+  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  contentType String    @map("content_type") @db.VarChar(50)
+  contentId   String    @map("content_id") @db.Uuid
+  action      String    @db.VarChar(50)
+  data        Json      @db.JsonB
+  submittedBy String?   @map("submitted_by") @db.Uuid
+  status      String?   @default("pending") @db.VarChar(50)
+  reviewedBy  String?   @map("reviewed_by") @db.Uuid
+  reviewNotes String?   @map("review_notes")
+  createdAt   DateTime? @default(now()) @map("created_at") @db.Timestamptz
+  reviewedAt  DateTime? @map("reviewed_at") @db.Timestamptz
+
+  submitter User? @relation("SubmittedModerations", fields: [submittedBy], references: [id])
+  reviewer  User? @relation("ReviewedModerations", fields: [reviewedBy], references: [id])
+
+  @@map("moderation_queue")
+}
+
+model SearchAnalytics {
+  id           String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  query        String
+  filters      Json?     @db.JsonB
+  resultsCount Int?      @map("results_count")
+  userId       String?   @map("user_id") @db.Uuid
+  ipAddress    String?   @map("ip_address")
+  userAgent    String?   @map("user_agent")
+  createdAt    DateTime? @default(now()) @map("created_at") @db.Timestamptz
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([createdAt], map: "idx_search_analytics_created")
+  @@index([query], map: "idx_search_analytics_query")
+  @@map("search_analytics")
+}

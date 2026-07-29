@@ -1,0 +1,14 @@
+{
+  "name": "@sponsorbase/data-collection-scripts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --import tsx --test company-enricher.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.0"
+  }
+}
